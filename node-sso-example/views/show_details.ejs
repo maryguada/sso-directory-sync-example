@@ -1,0 +1,67 @@
+<div id="detailsSection" style="display: none; margin-top: 20px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <h3>Directory Details</h3>
+    <div id="directoryInfo">
+        <p>Loading directory information...</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('showDetailsBtn').addEventListener('click', function() {
+        const detailsSection = document.getElementById('detailsSection');
+        const button = document.getElementById('showDetailsBtn');
+        
+        if (detailsSection.style.display === 'none') {
+            detailsSection.style.display = 'block';
+            button.textContent = 'Hide Details';
+            loadDirectoryInfo();
+        } else {
+            detailsSection.style.display = 'none';
+            button.textContent = 'Show More Details';
+        }
+    });
+
+    async function loadDirectoryInfo() {
+        try {
+            const response = await fetch('/directory-info');
+            const data = await response.json();
+            
+            if (data.success) {
+                let html = `
+                    <div class="table-container">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background-color: #f0f0f0;">
+                                    <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Organization</th>
+                                    <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Directory ID</th>
+                                    <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.directories.map(dir => `
+                                    <tr>
+                                        <td style="padding: 8px; border: 1px solid #ddd;"><strong>${dir.name || 'N/A'}</strong></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;"><code>${dir.id}</code></td>
+                                        <td style="padding: 8px; border: 1px solid #ddd;">
+                                            <a href="/directory/${dir.id}">
+                                                <button class="button button-sm button-outline">
+                                                    View
+                                                </button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                
+                document.getElementById('directoryInfo').innerHTML = html;
+            } else {
+                document.getElementById('directoryInfo').innerHTML = '<p>No directories found or error loading data.</p>';
+            }
+        } catch (error) {
+            document.getElementById('directoryInfo').innerHTML = '<p>Error loading directory information.</p>';
+            console.error('Error:', error);
+        }
+    }
+</script>

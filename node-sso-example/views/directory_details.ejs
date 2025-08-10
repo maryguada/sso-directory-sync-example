@@ -31,31 +31,35 @@
                 <div class="flex_column">
                     <div class="flex width-941px space-between">
                         <div>
+                            <h2>Directory Details</h2>
                         </div>
                         <div>
+                            <a href="/logout">
+                                <button class="button button-outline">
+                                    Log Out
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div>
-                        <div class="flex" style="align-items: center; margin-bottom: 20px; gap: 30px;">
-                            <div>
-                                <h2 style="margin: 0;">Hi, <%= firstName + ' ' + lastName %></h2>
-                            </div>
-                            <div>
-                                <a href="javascript:void(0)">
-                                    <button id="showDetailsBtn" class="button button-outline">
-                                        Show More Details
-                                    </button>
-                                </a>
-                            </div>
-                            <div>
-                                <a href="/logout">
-                                    <button class="button button-outline">
-                                        Log Out
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                        <%- include('show_details') %>
+                        <pre id="noborder" class="prettyprint noborder">
+                            <%- JSON.stringify(directory, null, 2) %>
+                        </pre>
+                    </div>
+                </div>
+                <div class="flex width-440px space-between">
+                    <div class="flex">
+                        <a href="/users?id=<%=directory.id%>">
+                            <button class="button" style="margin-right: 10px;">Users</button>
+                        </a>
+                        <a href="/groups?id=<%=directory.id%>" style="margin-right: 10px;">
+                            <button class="button">Groups</button>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/">
+                            <button class="button button-sm button-outline">Back to Profile</button>
+                        </a>
                     </div>
                 </div>
             </div>
