@@ -1,16 +1,23 @@
-# Node Example Applications powered by WorkOS
+#Node example application using WorkOS Node.js Library
 
-Example applications demonstrating to use the [WorkOS Node SDK](https://github.com/workos-inc/workos-node) for SSO, Directory Sync, Admin Portal and Magic Link.
+#Features
+Single Sign-On (SSO) - Authenticate users via their organization's identity provider (IdP)
+Directory Sync - Sync user and group data from identity providers
 
-## For more information, please see the following guides:
+#Prerequisites
+Node.js 16+
+npm or yarn
+WorkOS account, API key, Client ID, Orangization ID, Redirect URI
 
-- [Single Sign-On](https://workos.com/docs/sso/guide)
-- [Directory Sync](https://workos.com/docs/directory-sync/guide)
-- [Admin Portal](https://workos.com/docs/admin-portal/guide)
-- [Magic Link](https://workos.com/docs/magic-link/guide)
+#Installation
+1) git clone <repo-url>
+2) npm install
+3) cd into node-sso-example
+4) set up environment variables like below: 
 
-- [API Reference](https://workos.com/docs/reference)
+WORKOS_API_KEY=
+WORKOS_CLIENT_ID=
+WORKOS_ORGANIZATION_ID=
+WORKOS_REDIRECT_URI=
 
-## Need help?
-
-If you get stuck and aren't able to resolve the issue by reading our [WorkOS Node SDK documentation](https://docs.workos.com/sdk/node) or [API reference](https://workos.com/docs/reference), you can reach out to us at support@workos.com and we'll lend a hand!
+5) npm start
